@@ -103,11 +103,11 @@ productRoute.get("/:id", async (req, res) => {
     }
 })
 
-productRoute.post("/", async (req, res) => {
-    const { image_url, title, price, year, mileage, max_speed, userID } = req.body
+productRoute.post("/", authenticate, async (req, res) => {
+    const updated = req.body
 
     try {
-        const data = new ProductModel({ image_url: image_url, title: title, price: price, color: "red", year: year, mileage: mileage, max_speed: max_speed, userID: userID });
+        const data = new ProductModel(updated);
         await data.save();
         res.send(data);
     } catch (err) {
