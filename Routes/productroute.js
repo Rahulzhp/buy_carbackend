@@ -103,7 +103,7 @@ productRoute.get("/:id", async (req, res) => {
     }
 })
 
-productRoute.post("/", authenticate, async (req, res) => {
+productRoute.post("/", async (req, res) => {
     const { image_url, title, price, year, mileage, max_speed, userID } = req.body
 
     try {
