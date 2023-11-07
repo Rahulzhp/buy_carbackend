@@ -104,14 +104,26 @@ productRoute.get("/:id", async (req, res) => {
 })
 
 productRoute.post("/", authenticate, async (req, res) => {
-    const updated = req.body
+    const { image_url, title, price, year, mileage, max_speed, userID } = req.body
+    let logger_userID = req.body.userID;
 
     try {
-        const data = new ProductModel(updated);
+        const data = new ProductModel({
+            image_url: image_url,
+            title: title,
+            color: "red",
+            price: price,
+            year: year,
+            mileage: mileage,
+            max_speed: max_speed,
+            userID: logger_userID
+        });
+
         await data.save();
-        res.send(data);
+        res.json(data);
     } catch (err) {
-        res.send(err);
+        console.error(err);
+        res.status(500).json({ error: 'Failed to create the product' });
     }
 })
 

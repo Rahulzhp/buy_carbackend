@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken")
 const key = "cars"
 const authenticate = async (req, res, next) => {
-   
+
     let token = req.headers.authorization
     // console.log({token});
     // res.send(token)
@@ -14,7 +14,7 @@ const authenticate = async (req, res, next) => {
             if (verification) {
                 // res.send(verification)
                 console.log("verification", verification)
-                req.body.userID = verification.userId
+                req.body.userID = verification.userID
                 next()
             } else {
                 res.send("Please Login First")
